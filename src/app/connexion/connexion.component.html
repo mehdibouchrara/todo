@@ -1,0 +1,43 @@
+<app-nav></app-nav>
+
+<div class="container">
+
+  <form [formGroup]="connexionForm" (ngSubmit)="connexion()">
+
+    <div class="form-group col-md-6">
+      <label for="inputEmail">Email</label>
+      <input type="text" class="form-control" id="inputEmail" placeholder="Email" formControlName="email">
+      <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+        <div *ngIf="email.errors.required">
+          le mail est obligatoire
+        </div>
+        <div *ngIf="email.errors.email">
+            le mail est invalid
+          </div>
+
+      </div>
+    </div>
+
+    <div class="form-group col-md-6">
+      <label for="inputPasswd">Password</label>
+      <input type="password" class="form-control" id="inputPasswd" placeholder="Password" formControlName="password">
+      <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+        <div *ngIf="password.errors.required">
+          le mot de passe est obligatoire
+        </div>
+        <div *ngIf="password.errors.minlength">
+          le mot de passe doit comporte au minimum {{ password.errors.minlength.requiredLength }} caractere(s)
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <input type="submit" value="connexion" class="btn btn-outline-info mr-sm-2" [disabled]="connexionForm.invalid">
+  </form>
+
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,108 @@
+<app-nav></app-nav>
+<div class="container">
+  <button [routerLink]="['/addToDo']" class="btn btn-sm btn-success"> ajouter </button>
+
+  <div *ngIf="toDOs.length>0;then listYes else listNo"></div>
+  <div *ngIf="doneS.length>0;then DoneYes else DoneNo"></div>
+
+  <ng-template #listNo>
+    <div class="alert alert-danger">
+      no todos yet
+    </div>
+  </ng-template>
+
+  <ng-template #listYes>
+    <div class="col-lg-12" style="margin-top:30px;">
+
+
+      <p id="p" class="mt-2 h2" [textContent]="todo"></p>
+
+      <table class="table table-striped table-hover table-sm">
+        <thead>
+          <tr>
+            <th>description</th>
+            <th> date ajout</th>
+            <th> action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr *ngFor="let x of toDOs; let i = index;">
+            <td>{{x.text | uppercase}}</td>
+            <td>{{x.dateAjout | date:'short'}}</td>
+            <td>
+              <button class="btn btn-sm btn-danger" (click)="openModal(template,i)">supprimer</button>
+              <button [routerLink]="['/updateList']" class="btn btn-sm btn-info mx-sm-2 ">modifier</button>
+              <button class="btn btn-sm btn-success mr-sm-2" (click)="addToDone(i,toDOs)">done</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+
+    </div>
+  </ng-template>
+
+  <ng-template #DoneYes>
+    <hr size=10 align=center width="100%" color="black">
+
+    <h2 id="h2">Done</h2>
+
+    <table class="table table-striped table-hover table-sm">
+      <thead>
+        <tr>
+          <th>description</th>
+          <th> date ajout</th>
+          <th> date fin</th>
+          <th> action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <tr *ngFor="let y of doneS; let i = index;">
+
+          <td>{{y.description | uppercase}}</td>
+          <td>{{y.dateAjout | date:'short'}}</td>
+          <td>{{y.dateAjout | date:'short'}}</td>
+
+          <td>
+            <button class="btn btn-sm btn-danger" (click)="openModal(template2,i)">supprimer</button>
+          </td>
+        </tr>
+
+      </tbody>
+
+
+    </table>
+  </ng-template>
+
+  <ng-template #DoneNo>
+    <div class="alert alert-danger">
+      no dones yet
+    </div>
+  </ng-template>
+
+  <ng-template #template>
+    <div class="modal-body text-center">
+      <p>Do you want to confirm?</p>
+      <button type="button" class="btn btn-default-danger" (click)="deleteToDos()">Yes</button>
+      <button type="button" class="btn btn-danger" (click)="decline()">No</button>
+    </div>
+  </ng-template>
+
+
+  <ng-template #template2>
+    <div class="modal-body text-center">
+      <p>Do you want to confirm?</p>
+      <button type="button" class="btn btn-default-danger" (click)="deleteDones()">Yes</button>
+      <button type="button" class="btn btn-danger" (click)="decline()">No</button>
+    </div>
+  </ng-template>
+
+
+
+</div>
+<app-footer></app-footer>

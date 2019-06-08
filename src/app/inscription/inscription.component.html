@@ -1,0 +1,130 @@
+<app-nav></app-nav>
+<div class="container">
+
+  <form [formGroup]="inscriptionForm" (ngSubmit)="inscription()">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputFirstname">Firstname</label>
+        <input type="text" 
+        class="form-control" 
+        id="inputFirstname" 
+        placeholder="firstname"
+        formControlName="firstname"
+        >
+        <div *ngIf="firstname.touched && firstname.invalid" class="alert alert-danger">
+          <div *ngIf="firstname.errors.required">
+              le nom est obligatoire
+          </div>
+          <div *ngIf="firstname.errors.minlength">
+              le firstname doit comporte au minimum {{ firstname.errors.minlength.requiredLength }} caractere(s)
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-group col-md-6">
+        <label for="inputlastname">lastname</label>
+        <input type="text" 
+        class="form-control" 
+        id="inputlastname" 
+        placeholder="lastname"
+        formControlName="lastname"
+        >
+        <div *ngIf="lastname.touched && lastname.invalid" class="alert alert-danger">
+          <div *ngIf="lastname.errors.required">
+              le nom est obligatoire
+          </div>
+          <div *ngIf="lastname.errors.minlength">
+              le lastname doit comporte au minimum {{ lastname.errors.minlength.requiredLength }} caractere(s)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputEmail">Email</label>
+        <input type="text" 
+        class="form-control" 
+        id="inputEmail" 
+        placeholder="Email"
+        formControlName="email"
+        >
+        <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+          <div *ngIf="email.errors.required">
+              le mail est obligatoire
+          </div>
+          
+        </div>
+      </div>
+      
+
+      <div class="form-group col-md-6">
+        <label for="inputTom">Tel</label>
+        <input type="text" 
+        class="form-control" 
+        id="inputTel" 
+        placeholder="Tel"
+        formControlName="tel"
+        >
+        <div *ngIf="tel.touched && tel.invalid" class="alert alert-danger">
+          <div *ngIf="tel.errors.required">
+              le tel est obligatoire
+          </div>
+          <div *ngIf="tel.errors.pattern">
+              le num du tel doit comporte au minimum 13 caracteres et au maximum 13 caracteres
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputPasswd">Password</label>
+        <input 
+              type="password" 
+              class="form-control" 
+              id="inputPasswd" 
+              placeholder="Password"
+              formControlName="password"
+              >
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+          <div *ngIf="password.errors.required">
+              le mot de passe est obligatoire
+          </div>
+          <div *ngIf="password.errors.minlength">
+              le mot de passe doit comporte au minimum {{ password.errors.minlength.requiredLength }} caractere(s)
+          </div>
+        </div>
+      </div>
+     
+      <div class="form-group col-md-6">
+        <label for="inputRepPassword">Repeter Password</label>
+        <input 
+              type="password" 
+              class="form-control" 
+              id="inputRepPasswd" 
+              placeholder="repPassword"
+              formControlName="repPassword"
+              >
+        <div *ngIf="repPassword.touched && repPassword.invalid" class="alert alert-danger">
+          <div *ngIf="repPassword.errors.required">
+              la confirmation du mot de passe est obligatoire
+          </div>
+          <div *ngIf="repPassword.errors.minlength">
+              le mot de passe doit comporte au minimum {{ repPassword.errors.minlength.requiredLength }} caractere(s)
+          </div>
+          
+        </div>
+        <div *ngIf="repPassword.valid && inscriptionForm.invalid && inscriptionForm.errors.passwordShouldMatch" class="alert alert-danger">
+          les mots de passe ne correpondent pas 
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="inscriptionForm.invalid">Sign in</button>
+    
+  </form>
+
+
+</div>
+<app-footer></app-footer>
